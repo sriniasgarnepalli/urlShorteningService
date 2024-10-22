@@ -16,4 +16,5 @@ You should create a RESTful API for a URL shortening service. The API should all
 
 - Have integrated mongoose for storing user information over mongdb
 - Built routes to handle CRUD for user
+- Have restructed the project folder which consists of routes, controllers, models, util, middleware 
   
