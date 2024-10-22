@@ -11,3 +11,9 @@ You should create a RESTful API for a URL shortening service. The API should all
 - Delete an existing short URL
 - Get statistics on the short URL (e.g., number of times accessed)
 - You can optionally setup a minimal frontend to interact with the API and setup redirects for the short URLs to the original URLs
+
+# Current Status as on 22-10-2024
+
+- Have integrated mongoose for storing user information over mongdb
+- Built routes to handle CRUD for user
+  
