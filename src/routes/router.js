@@ -1,16 +1,19 @@
 import express from "express";
+import shortenUrl from "../controllers/shorteningController.js";
+import redirectUrl from "../controllers/redirectURL.js";
+import shortUrlUsage from "../controllers/getAnalytics.js";
 
 const router = express.Router();
 
-router.get("/shorten/:shortCode"); // retrieve original URL
+router.get("/:shortUrl", redirectUrl); // retrieve original URL
 
-router.get("/shorten/:shortCode/stats"); // get URL statistics
+router.get("/stats/:shortUrl", shortUrlUsage); // get URL statistics
 
-router.post("/shorten"); // create short URL
+router.post("/", shortenUrl); // create short URL
 
-router.put("/shorten/:shortCode"); // update short URL
+router.put("/:shortCode"); // update short URL
 
-router.delete("/shorten/:shortCode"); // delete short URL
+router.delete("/:shortCode"); // delete short URL
 
 router.get("*", (req, res) => {
   return res.status(400).send("Not found");

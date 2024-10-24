@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors("*"));
 app.use("/api", userRouter);
-app.use("/application", router);
+app.use("/application/shorten", router);
 
 connectDB();
 

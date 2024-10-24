@@ -13,7 +13,7 @@ const urlSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User model
+  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User model
   createdAt: {
     type: Date,
     default: Date.now
@@ -21,7 +21,16 @@ const urlSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  clicks: { type: Number, default: 0 },
+  accessLog: [
+    {
+      ipAddress: String, // To log the IP address of the user
+      userAgent: String, // User-agent string
+      referrer: String, // Referrer URL, if available
+      timestamp: { type: Date, default: Date.now } // Timestamp of the access
+    }
+  ]
 });
 
 const Url = mongoose.model("Url", urlSchema);
