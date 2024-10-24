@@ -6,11 +6,16 @@ const shortUrlUsage = async (req, res) => {
   const urlData = await Url.findOne({ shortUrl });
 
   if (urlData) {
+    const analyticsData = {
+      originalUrl: urlData.originalUrl,
+      clicks: urlData.clicks,
+      accessLog: urlData.accessLog
+    };
     return res.status(200).json({
-      clicks: urlData.clicks
+      analyticsData
     });
   }
-  return res.status(400).json({ message: "Invalid Short Code" });
+  return res.status(400).json({ message: "URL Not found" });
 };
 
 export default shortUrlUsage;
