@@ -1,34 +1,32 @@
 import Url from "../models/URL.js";
 import { nanoid } from "nanoid";
-import redirectUrl from "./redirectURL.js";
 
 const shortenUrl = async (req, res) => {
-  const { originalUrl } = req.body;
+  const { originalUrl, userId } = req.user;
   const baseUrl = process.env.BASE_URL;
 
   if (!originalUrl || !validURL(originalUrl)) {
-    return res.status(400).json("Invalid URL");
+    return res.status(400).json({ message: "Invalid URL" });
   }
 
   try {
     let url = await Url.findOne({ originalUrl });
     if (url) {
-      return res.status(200).json({ shortUrl: url.shortUrl });
+      return res.status(200).json({ shortCode: url.shortUrl });
     }
 
     const shortUrl = nanoid(6);
-
     url = new Url({
       originalUrl,
-      shortUrl
+      shortUrl,
+      userId
     });
-
     await url.save();
-    res
+    return res
       .status(201)
       .json({ shortUrl: `${shortUrl}`, redirectUrl: `${baseUrl}/${shortUrl}` });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

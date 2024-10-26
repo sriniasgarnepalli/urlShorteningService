@@ -13,7 +13,7 @@ const urlSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User model
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to User model
   createdAt: {
     type: Date,
     default: Date.now

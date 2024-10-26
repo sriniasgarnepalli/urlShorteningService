@@ -5,7 +5,7 @@ import User from "../models/User.js";
 
 const protect = async (req, res, next) => {
   let token;
-
+  const { originalUrl } = req.body;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -23,8 +23,9 @@ const protect = async (req, res, next) => {
         return res.status(401).json({ message: "Not authorized" });
       }
 
-      req.user = user;
-      next();
+      req.user = originalUrl ? { userId: user._id, originalUrl } : user;
+
+      return next();
     } catch (error) {
       return res.status(401).json({ message: "Not authorized" });
     }

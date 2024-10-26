@@ -4,7 +4,6 @@ const shortUrlUsage = async (req, res) => {
   const { shortUrl } = req.params;
 
   const urlData = await Url.findOne({ shortUrl });
-
   if (urlData) {
     const analyticsData = {
       originalUrl: urlData.originalUrl,
